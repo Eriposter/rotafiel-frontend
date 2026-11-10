@@ -1,0 +1,77 @@
+<footer class="mt-auto bg-brand-950 text-slate-300">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+    <!-- Apresentação -->
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600 font-bold text-white">RF</span>
+        <span class="text-lg font-extrabold tracking-wide text-white">{{ companyName }}</span>
+      </div>
+      <p class="text-sm leading-relaxed text-slate-400">
+        Empresa angolana de comércio e prestação de serviços, vocacionada para o provisionamento e o fornecimento de
+        materiais, equipamentos e soluções para operações industriais.
+      </p>
+    </div>
+
+    <!-- Links rápidos -->
+    <nav aria-label="Links rápidos">
+      <h3 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Navegação</h3>
+      <ul class="space-y-2 text-sm">
+        @for (link of quickLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.path" class="text-slate-400 transition-colors hover:text-accent-400">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Serviços -->
+    <nav aria-label="Serviços">
+      <h3 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Serviços</h3>
+      <ul class="space-y-2 text-sm">
+        @for (link of serviceLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.path" class="text-slate-400 transition-colors hover:text-accent-400">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Contactos -->
+    <div>
+      <h3 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Contactos</h3>
+      <ul class="space-y-3 text-sm text-slate-400">
+        <li class="flex items-start gap-2">
+          <span aria-hidden="true">📍</span>
+          <span>{{ contact().address }}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span aria-hidden="true">✉️</span>
+          <a [href]="'mailto:' + contact().email" class="hover:text-accent-400 transition-colors">
+            {{ contact().email }}
+          </a>
+        </li>
+        <li class="flex items-start gap-2">
+          <span aria-hidden="true">📞</span>
+          <a [href]="'tel:' + contact().phone.replace(' ', '')" class="hover:text-accent-400 transition-colors">
+            {{ contact().phone }}
+          </a>
+        </li>
+        <li class="flex items-start gap-2">
+          <span aria-hidden="true">🕐</span>
+          <span>{{ contact().hours }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row lg:px-8">
+      <p>© {{ currentYear }} {{ companyName }} — Todos os direitos reservados.</p>
+      <p>Luanda · Angola</p>
+    </div>
+  </div>
+</footer>

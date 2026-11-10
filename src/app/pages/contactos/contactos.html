@@ -1,0 +1,171 @@
+<!-- Cabeçalho da página -->
+<section class="bg-brand-950 py-16 text-white">
+  <div class="mx-auto max-w-7xl px-4 lg:px-8">
+    <p class="text-xs font-bold uppercase tracking-widest text-accent-300">Contactos</p>
+    <h1 class="mt-2 text-4xl font-extrabold sm:text-5xl">Fale connosco</h1>
+    <p class="mt-4 max-w-3xl text-lg text-slate-300">
+      Estamos prontos para apoiar a sua próxima aquisição. Peça uma cotação ou esclareça as suas dúvidas.
+    </p>
+  </div>
+</section>
+
+<section class="bg-white py-20">
+  <div class="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-5 lg:px-8">
+    <!-- Informações -->
+    <div class="space-y-6 lg:col-span-2">
+      <h2 class="text-2xl font-extrabold text-brand-900">Informações de contacto</h2>
+
+      <ul class="space-y-5">
+        <li class="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-xl">📍</span>
+          <div>
+            <h3 class="font-bold text-brand-900">Localização</h3>
+            <p class="text-sm text-slate-600">{{ contact().address }}</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-xl">✉️</span>
+          <div>
+            <h3 class="font-bold text-brand-900">E-mail</h3>
+            <a [href]="'mailto:' + contact().email" class="text-sm text-accent-600 hover:text-accent-700">
+              {{ contact().email }}
+            </a>
+          </div>
+        </li>
+        <li class="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-xl">📞</span>
+          <div>
+            <h3 class="font-bold text-brand-900">Telefone</h3>
+            <a [href]="'tel:' + contact().phone.replace(' ', '')" class="text-sm text-accent-600 hover:text-accent-700">
+              {{ contact().phone }}
+            </a>
+          </div>
+        </li>
+        <li class="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50 p-5">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-xl">🕐</span>
+          <div>
+            <h3 class="font-bold text-brand-900">Horário</h3>
+            <p class="text-sm text-slate-600">{{ contact().hours }}</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="rounded-xl bg-brand-900 p-6 text-sm leading-relaxed text-slate-300">
+        Respondemos a pedidos de cotação em até <strong class="text-accent-300">24 horas úteis</strong>. Para
+        operações críticas, indique a urgência na mensagem e priorizamos a análise.
+      </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="lg:col-span-3">
+      @if (!submitted()) {
+        <form (ngSubmit)="onSubmit()" class="space-y-5 rounded-2xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+          <h2 class="text-2xl font-extrabold text-brand-900">Pedido de cotação</h2>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-semibold text-slate-700">Nome *</span>
+              <input
+                type="text"
+                name="name"
+                [value]="form().name"
+                (input)="onFieldChange('name', $any($event.target).value)"
+                required
+                class="w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                placeholder="O seu nome"
+              />
+            </label>
+
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-semibold text-slate-700">Empresa</span>
+              <input
+                type="text"
+                name="company"
+                [value]="form().company"
+                (input)="onFieldChange('company', $any($event.target).value)"
+                class="w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                placeholder="Nome da empresa"
+              />
+            </label>
+
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-semibold text-slate-700">E-mail *</span>
+              <input
+                type="email"
+                name="email"
+                [value]="form().email"
+                (input)="onFieldChange('email', $any($event.target).value)"
+                required
+                class="w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                placeholder="nome@empresa.com"
+              />
+            </label>
+
+            <label class="block">
+              <span class="mb-1.5 block text-sm font-semibold text-slate-700">Telefone</span>
+              <input
+                type="tel"
+                name="phone"
+                [value]="form().phone"
+                (input)="onFieldChange('phone', $any($event.target).value)"
+                class="w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+                placeholder="+244 ..."
+              />
+            </label>
+          </div>
+
+          <label class="block">
+            <span class="mb-1.5 block text-sm font-semibold text-slate-700">Assunto</span>
+            <select
+              name="subject"
+              [value]="form().subject"
+              (change)="onFieldChange('subject', $any($event.target).value)"
+              class="w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            >
+              @for (option of subjects; track option) {
+                <option [value]="option">{{ option }}</option>
+              }
+            </select>
+          </label>
+
+          <label class="block">
+            <span class="mb-1.5 block text-sm font-semibold text-slate-700">Mensagem *</span>
+            <textarea
+              name="message"
+              rows="6"
+              [value]="form().message"
+              (input)="onFieldChange('message', $any($event.target).value)"
+              required
+              class="w-full resize-y rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+              placeholder="Descreva as especificações, quantidades e condições do seu pedido..."
+            ></textarea>
+          </label>
+
+          <button
+            type="submit"
+            class="w-full rounded-md bg-accent-600 px-6 py-3.5 text-sm font-bold text-white shadow transition-colors hover:bg-accent-700 sm:w-auto"
+          >
+            Enviar pedido
+          </button>
+          <p class="text-xs text-slate-500">* Campos obrigatórios</p>
+        </form>
+      } @else {
+        <div class="rounded-2xl border border-green-200 bg-green-50 p-10 text-center shadow-sm">
+          <span class="text-5xl" aria-hidden="true">✅</span>
+          <h2 class="mt-4 text-2xl font-extrabold text-green-800">Pedido recebido!</h2>
+          <p class="mx-auto mt-2 max-w-md text-green-700">
+            Obrigado pelo seu contacto, {{ form().name }}. A equipa da ROTA FIEL responderá ao seu pedido de
+            "{{ form().subject }}" em até 24 horas úteis.
+          </p>
+          <button
+            type="button"
+            (click)="resetForm()"
+            class="mt-6 rounded-md bg-green-700 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-green-800"
+          >
+            Enviar novo pedido
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</section>
